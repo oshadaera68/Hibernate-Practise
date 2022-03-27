@@ -1,4 +1,7 @@
 import entity.Customer;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import util.FactoryConfiguration;
 
 /**
  * Powered By:MINDARTLK.
@@ -7,15 +10,16 @@ import entity.Customer;
 
 public class Demo {
     public static void main(String[] args) {
-        /*System.out.println("era");*/
-
         Customer customer = new Customer();
-        customer.setId("C001");
-        customer.setName("gamage");
-        customer.setAddress("galle");
+        customer.setId("C002");
+        customer.setName("amesh");
+        customer.setAddress("ahangama");
         customer.setSalary(35000);
 
-        save(customer);
-
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+        session.save(customer);
+        transaction.commit();
+        session.close();
     }
 }
